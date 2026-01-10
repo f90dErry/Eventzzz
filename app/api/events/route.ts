@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// get all events
 export async function GET() {
   try {
     await connectDB()
