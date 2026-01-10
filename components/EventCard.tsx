@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { title } from 'process'
 import Image from 'next/image'
 
 interface Props {
