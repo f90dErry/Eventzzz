@@ -1,5 +1,5 @@
-import { loadComponents } from 'next/dist/server/load-components'
 import { notFound } from 'next/navigation'
+import { json } from 'stream/consumers'
 
 const BASE_URl = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -15,6 +15,27 @@ const EventDetailItem = ({
   <div className='flex-row-gap-2 items-center'>
     <img src={icon} alt={alt} width={17} height={17} />
     <p>{label}</p>
+  </div>
+)
+
+const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
+  <div className='agenda'>
+    <h2>Agenda</h2>
+    <ul>
+      {agendaItems.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  </div>
+)
+
+const EventTags = ({ tags }: { tags: string[] }) => (
+  <div className='flex flex-row gap-1.5 flex-wrap'>
+    {tags.map((tag) => (
+      <div className='pill' key={tag}>
+        {tag}
+      </div>
+    ))}
   </div>
 )
 
@@ -36,6 +57,8 @@ const EventDetailsPage = async ({
       mode,
       agenda,
       audience,
+      organizer,
+      tags,
     },
   } = await request.json()
 
@@ -80,6 +103,14 @@ const EventDetailsPage = async ({
               label={audience}
             />
           </section>
+          <EventAgenda agendaItems={JSON.parse(agenda[0])} />
+
+          <section className='flex-col-gap-2'>
+            <h2>About the organizer</h2>
+            <p>{organizer}</p>
+          </section>
+
+          <EventTags tags={JSON.parse(tags[0])} />
         </div>
 
         {/* right side - Booking form */}
