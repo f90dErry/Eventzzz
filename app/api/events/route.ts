@@ -2,7 +2,6 @@ import connectDB from '@/lib/mongodb'
 import Event from '@/database/event.model'
 import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
-import { error } from 'console'
 
 export async function POST(req: NextRequest) {
   try {
