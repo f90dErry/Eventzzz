@@ -79,7 +79,7 @@ export async function GET(
     // handle unknown error
     return NextResponse.json(
       { message: 'Unknown error occurred' },
-      { status: 400 }
+      { status: 500 }
     )
   }
 }
