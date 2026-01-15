@@ -1,7 +1,9 @@
+import BookEvent from '@/components/BookEvent'
 import { notFound } from 'next/navigation'
-import { json } from 'stream/consumers'
 
 const BASE_URl = process.env.NEXT_PUBLIC_BASE_URL
+
+const bookings = 10
 
 const EventDetailItem = ({
   icon,
@@ -115,7 +117,18 @@ const EventDetailsPage = async ({
 
         {/* right side - Booking form */}
         <aside className='booking'>
-          <p className='text-lg font-semibold'>Book Event</p>
+          <div className='signup-card'>
+            <h2>Book Your spot</h2>
+            {bookings > 0 ? (
+              <p className='text-sm'>
+                Join {bookings} who have alrady booked their spot
+              </p>
+            ) : (
+              <p className='text-sm'>Be the first to book your spot!</p>
+            )}
+
+            <BookEvent />
+          </div>
         </aside>
       </div>
     </section>
